@@ -1,5 +1,7 @@
 Thank you so much for this opportuinty!
 
+I use python 3.10.6. Please note that the venv was ignored.
+
 If you want to run it via cmd, you will need to install the file requirements.txt via pip install -r requirements.
 
 Then python manage.py runserver
