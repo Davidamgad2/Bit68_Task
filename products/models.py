@@ -48,13 +48,34 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """return string represent of our user"""
         return self.email
-    
+
 
 class Product(models.Model):
     """database model for products in the system"""
-    name=models.CharField(max_length=60)
-    price=models.IntegerField()
+    name = models.CharField(max_length=60)
+    price = models.IntegerField()
 
     def __str__(self):
         return self.name
 
+
+class Cart(models.Model):
+    """Handling the cart model"""
+
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.name
+
+
+class CartItem(models.Model):
+    """Handling cart items"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='items')
+    cart=models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cartitems')
+    quantity=models.IntegerField(default=0)
+
+
+    def __str__(self):
+        return self.product.name
+    
